@@ -38,7 +38,7 @@ function formProvider(fields) {
                 if (!valid) {
                    newFieldState.valid = false;
                    newFieldState.error = error;
-                   break;
+                   return;
                 }
 
                 const newForm = {...form, [fieldName]: newFieldState};
