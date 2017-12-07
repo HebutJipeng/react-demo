@@ -120,16 +120,14 @@ class Add extends Component {
                         <input 
                             type="number" 
                             value={ age.value || '' } 
-                            onChange={e => onFormChange('age', e.target.value, 'number')}
+                            onChange={e => onFormChange('age', +e.target.value)}
                          />
                         { !age.valid && <span>{age.error}</span>}
                         <br />
                         <label>性别:</label>
                         <select 
-                            name="" 
-                            id="" 
                             value={ sex.value } 
-                            onChange={e => this.onFormChange('sex', e.target.value)}
+                            onChange={e => onFormChange('sex', e.target.value)}
                         >
                             <option value="">请选择</option>
                             <option value="male">男</option>
@@ -172,7 +170,7 @@ Add = formProvider({
             }
         ]
     },
-    gender: {
+    sex: {
         defaultValue: '',
         rules: [
             {

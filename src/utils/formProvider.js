@@ -16,14 +16,15 @@ function formProvider(fields) {
                 this.state = {
                     form: initialFormState,
                     formValid: false
-                }
+                };
                 this.handleValueChange = this.handleValueChange.bind(this)
             }
 
             handleValueChange(fieldName, value) {
                 const { form } = this.state;
-                const newFieldState = { value, valid: true, error: ''};
-                const fieldRules = field[fieldName].rules;
+
+                const newFieldState = { value, valid: true, error: '' };
+                const fieldRules = fields[fieldName].rules;
 
                 for (let i = 0; i < fieldRules.length; i++) {
                     const { pattern, error } = fieldRules[i];
@@ -33,13 +34,14 @@ function formProvider(fields) {
                     } else {
                         valid = pattern.test(value);
                     }
-                }                
 
-                if (!valid) {
-                   newFieldState.valid = false;
-                   newFieldState.error = error;
-                   return;
-                }
+                    if (!valid) {
+                        newFieldState.valid = false;
+                        newFieldState.error = error;
+                        return;
+                    }
+                }                
+                
 
                 const newForm = {...form, [fieldName]: newFieldState};
                 const formValid = Object.values(newForm).every(f => f.valid);
