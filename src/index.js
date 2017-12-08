@@ -12,10 +12,10 @@ ReactDOM.render((
     <BrowserRouter forceRefresh={ true }>
         <div>
             <Switch>
+                {/* todo */}
                 <Route exact path="/" component={HomePage } />
                 <Route  path="/user" component={UserAddPage } />
             </Switch>
-                
         </div>
     </BrowserRouter>
 ), document.getElementById('root'));

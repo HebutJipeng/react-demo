@@ -1,9 +1,9 @@
 import react from "react";
 import formProvider from "../utils/formProvider";
 import FormItem from "../component/FormItem";
-const { Component } = react;
+import HomeLayout from "../layouts/HomeLayout";
 
-class Add extends Component {
+class Add extends react.Component {
     handleSubmit(e) {
 
         e.preventDefault();
@@ -42,67 +42,36 @@ class Add extends Component {
     render() {
         const { form:{ name, age, sex }, onFormChange} = this.props;
         return(
-            <div>
-                <header>
-                    <h1>添加用户</h1>
-                </header>
-                <main>
-                    <form onSubmit={e => this.handleSubmit(e)}>
-                        {/* <label>用户名:</label>
-                        <input 
-                            type="text" 
-                            value={ name.value } 
+            <HomeLayout title="添加用户">
+                <form onSubmit={e => this.handleSubmit(e)}>
+                    <FormItem label="用户名：" valid={name.valid} error={name.error}>
+                        <input
+                            type="text"
+                            value={name.value}
                             onChange={e => onFormChange('name', e.target.value)}
-                        />
-                        { !name.valid && <span>{name.error}</span>}
-                        <br />
-                        <label>年龄:</label>
-                        <input 
-                            type="number" 
-                            value={ age.value || '' } 
+                        /> 
+                    </FormItem>
+                    <FormItem label="年龄：" valid={age.valid} error={age.error}>
+                        <input
+                            type="number"
+                            value={age.value || ''}
                             onChange={e => onFormChange('age', +e.target.value)}
-                         />
-                        { !age.valid && <span>{age.error}</span>}
-                        <br />
-                        <label>性别:</label>
-                        <select 
-                            value={ sex.value } 
+                        /> 
+                    </FormItem>
+                    <FormItem label="性别：" valid={sex.valid} error={sex.error}>
+                        <select
+                            value={sex.value}
                             onChange={e => onFormChange('sex', e.target.value)}
                         >
                             <option value="">请选择</option>
                             <option value="male">男</option>
                             <option value="female">女</option>
-                        </select>
-                        { !sex.valid && <span>{sex.error}</span>} */}
-                        <FormItem label="用户名：" valid={name.valid} error={name.error}>
-                            <input
-                                type="text"
-                                value={name.value}
-                                onChange={e => onFormChange('name', e.target.value)}
-                            /> 
-                        </FormItem>
-                        <FormItem label="年龄：" valid={age.valid} error={age.error}>
-                            <input
-                                type="number"
-                                value={age.value || ''}
-                                onChange={e => onFormChange('age', +e.target.value)}
-                            /> 
-                        </FormItem>
-                        <FormItem label="性别：" valid={sex.valid} error={sex.error}>
-                            <select
-                                value={sex.value}
-                                onChange={e => onFormChange('sex', e.target.value)}
-                            >
-                                <option value="">请选择</option>
-                                <option value="male">男</option>
-                                <option value="female">女</option>
-                            </select> 
-                        </FormItem>
-                        <br />
-                        <input type="submit" value="submit" />
-                    </form>
-                </main>
-            </div>
+                        </select> 
+                    </FormItem>
+                    <br />
+                    <input type="submit" value="submit" />
+                </form>
+            </HomeLayout>
         )
     }
 }
