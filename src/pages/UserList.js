@@ -3,22 +3,23 @@ import react from "react";
 class UserList extends react.Component{
     constructor (props) {
         super(props);
-        this.state({
-            UserList: []
-        })
+        this.state = {
+            userList: []
+        }
     }
     componentWillMount () {
         fetch('http://localhost:3000/user')
             .then(res => res.json())
             .then(res => {
+                console.log(res)
                 this.setState({
-                    UserList: res
+                    userList: res
                 });
             });
     }
 
     render() {
-        const { UserList } = this.state.UserList
+        const { userList } = this.state
         return(
             <div>
                 <header>
@@ -37,11 +38,15 @@ class UserList extends react.Component{
                         </thead>
                         <tbody>
                             {
-                                UserList.map(user => {
+                                userList.map((user) => {
                                     return (
                                         <tr key={ user.id }>
+                                            <td>{ user.id }</td>
+                                            <td>{ user.name }</td>
+                                            <td>{ user.sex }</td>
+                                            <td>{ user.age }</td>
                                         </tr>
-                                    )
+                                    );
                                 })
                             }
                         </tbody>
@@ -51,3 +56,4 @@ class UserList extends react.Component{
         )
     }
 }
+export default UserList;

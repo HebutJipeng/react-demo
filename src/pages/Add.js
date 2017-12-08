@@ -179,7 +179,7 @@ Add = formProvider({
                 error: '请输入用户名'
             },
             {
-                pattern: /^.{1,4}$/,
+                pattern: /^.{1,10}$/,
                 error: '用户名最多4个字符'
             }
         ]

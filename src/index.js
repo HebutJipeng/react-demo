@@ -11,14 +11,11 @@ const supportsHistory = 'pushState' in window.history;
 ReactDOM.render((
     <BrowserRouter forceRefresh={ true }>
         <div>
-            <ul>
-                <li><Link to="/user" >useradd</Link></li>
-            </ul>
             <Switch>
-                <Route exact path="/add" component={() => { return (<div>111</div>)}} />
                 <Route exact path="/" component={HomePage } />
-                <Route path="/user" component={UserAddPage } />
+                <Route  path="/user" component={UserAddPage } />
             </Switch>
+                
         </div>
     </BrowserRouter>
 ), document.getElementById('root'));
