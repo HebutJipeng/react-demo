@@ -4,29 +4,6 @@ const Component = react.Component;
 import Add from "./Add"
 import UserList from "./UserList";
 
-// const Add = () => (
-//     <div>
-//         <header>添加用户</header>
-//         <main>
-//             <form onSubmit={ e => this.handleSubmit(e) }>
-//                 <label>用户名:</label>
-//                 <input type="text"/>
-//                 <br/>
-//                 <label>年龄:</label>
-//                 <input type="number"/>
-//                 <br/>
-//                 <label>性别:</label>
-//                 <select name="" id="">
-//                     <option value="male">男</option>
-//                     <option value="female">女</option>
-//                 </select>
-//                 <br/>
-//                 <input type="submit" value="submit" />
-//             </form>
-//         </main>
-//     </div>
-// )
-
 class UserAdd extends Component {
     render() {
         return (

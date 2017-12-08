@@ -4,67 +4,6 @@ import FormItem from "../component/FormItem";
 const { Component } = react;
 
 class Add extends Component {
-    // constructor() {
-    //     super();
-    //     this.state = {
-    //         form: {
-    //             name: {
-    //                 valid: false,
-    //                 value: '',
-    //                 error: ''                    
-    //             },
-    //             age: {
-    //                 valid: false,
-    //                 value: 0,
-    //                 error: ''                    
-    //             },
-    //             sex: {
-    //                 valid: false,
-    //                 value: '',
-    //                 error: ''                    
-    //             }
-    //         }
-            
-    //     }
-    // }
-    // handleValueChange(field, value, type = "string") {
-    //     if (type === 'number') {
-    //         value = +value
-    //     }
-    //     const { form } = this.state 
-    //     const newFieldValue = { valid: true, error: '', value }
-
-    //     switch (field) {
-    //         case 'name':
-    //             if (value.length >= 5 ) {
-    //                newFieldValue.valid = false
-    //                newFieldValue.error = 'to long'
-    //             } else if (value.length == 0) {
-    //                 newFieldValue.valid = false
-    //                 newFieldValue.error = 'cant null'
-    //             }
-    //             break;
-    //         case 'age':
-    //             if (value > 100 || value <=0 ) {
-    //                 newFieldValue.valid = false
-    //                 newFieldValue.error = 'not number'
-    //             }
-    //             break;
-    //         case 'sex':
-    //             if (!value) {
-    //                 newFieldValue.valid = false
-    //                 newFieldValue.error = 'please choose'
-    //             }
-    //             break;
-    //     }
-
-    //     this.setState({
-    //         form: {
-    //             ...form,
-    //             [field]: newFieldValue
-    //         }
-    //     })
-    // }
     handleSubmit(e) {
 
         e.preventDefault();
