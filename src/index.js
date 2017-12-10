@@ -14,7 +14,7 @@ ReactDOM.render((
             <Switch>
                 {/* todo */}
                 <Route exact path="/" component={HomePage } />
-                <Route  path="/user" component={UserAddPage } />
+                <Route path="/user" component={UserAddPage } />
             </Switch>
         </div>
     </BrowserRouter>

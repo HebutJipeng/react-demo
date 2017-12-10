@@ -20,7 +20,8 @@ class UserList extends react.Component{
     }
 
     handleEdit (user) {
-
+        console.log(this.context.router)
+        this.context.router.history.push('/user/edit/' + user.id)
     }
 
     handleDel (user) {
@@ -84,4 +85,12 @@ class UserList extends react.Component{
         )
     }
 }
+
+UserList.contextTypes = {
+    router: react.PropTypes.object.isRequired
+}
+// // // UserEdit.contextTypes = {
+// //     router: React.PropTypes.object.isRequired
+// };
+
 export default UserList;
