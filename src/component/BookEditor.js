@@ -1,8 +1,54 @@
 import react from "react";
 import formProvider from "../utils/formProvider";
-import FormItem from "../component/FormItem";
+import FormItem from "./FormItem";
+import AutoComplete from "./AutoComplete";
 
 class BookEditor extends react.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            recommendUsers: []
+        }
+    }
+
+    getRecommendUsers(partialUserId) {
+        fetch('http://localhost:3000/user?id_like=' + partialUserId)
+            .then(res => res.json())
+            .then(res => {
+                if (res.length == 1 && res.value == partialUserId) {
+                    return;
+                }
+                this.setState({
+                    recommendUsers: res.map(user => {
+                        return {
+                            text: `${user.id}(${user.name})`,
+                            value: user.id
+                        }
+                    })
+                })
+            })
+    }
+
+    // 函数节流
+    timer = 0
+    handleOwnerIdChange (value) {
+        this.props.onFormChange('owner_id', value)
+        this.setState({
+            recommendUsers: []
+        })
+
+        if (this.timer) {
+           clearTimeout(this.timer) 
+        }
+
+        if (value) {
+           this.timer = setTimeout(() => {
+              this.getRecommendUsers(value) 
+              this.timer = 0;
+           }, 200); 
+        }
+    }
+    
     handleSubmit(e) {
 
         e.preventDefault();
@@ -56,6 +102,7 @@ class BookEditor extends react.Component {
     }
 
     render() {
+        const { recommendUsers } = this.state
         const { form: { name, price, owner_id }, onFormChange } = this.props;
         return (
             <form onSubmit={e => this.handleSubmit(e)}>
@@ -74,10 +121,10 @@ class BookEditor extends react.Component {
                     />
                 </FormItem>
                 <FormItem label="所有者：" valid={owner_id.valid} error={owner_id.error}>
-                    <input
-                        type="text"
-                        value={owner_id.value}
-                        onChange={e => onFormChange('owner_id', +e.target.value)}
+                    <AutoComplete 
+                        value={owner_id.value ? owner_id.value + '' : ''}
+                        options={ recommendUsers }
+                        onValueChange={value => this.handleOwnerIdChange(value)}
                     />
                 </FormItem>
                 <br />

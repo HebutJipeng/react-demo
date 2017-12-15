@@ -1,5 +1,5 @@
 ## 参考教程
-[link to](http://blog.csdn.net/awaw00/article/details/54710595)
+[【React全家桶入门】](http://blog.csdn.net/awaw00/article/details/54710595)
 
 ---
 
