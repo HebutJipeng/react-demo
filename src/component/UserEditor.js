@@ -1,7 +1,7 @@
 import react from "react";
 import formProvider from "../utils/formProvider";
 import FormItem from "../component/FormItem";
-
+import { post } from '../utils/request';
 class UserEditor extends react.Component {
     handleSubmit(e) {
 
@@ -23,16 +23,10 @@ class UserEditor extends react.Component {
         }
 
 
-        fetch(apiUrl, {
-            method: method,
-            body: JSON.stringify({
+        post(apiUrl, {
                 name: name.value,
                 age: age.value,
                 sex: sex.value
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
         })
             .then(res => res.json())
             .then(res => {

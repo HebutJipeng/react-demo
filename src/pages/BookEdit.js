@@ -1,6 +1,7 @@
 import react from "react";
 import HomeLayout from "../layouts/HomeLayout";
 import BookEditor from "../component/BookEditor";
+import { get } from "../utils/request";
 
 class BookEdit extends react.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class BookEdit extends react.Component {
 
     componentWillMount() {
         const bookId = this.context.router.route.match.params.id;
-        fetch('http://localhost:3000/book/' + bookId)
+        get('http://localhost:3000/book/' + bookId)
             .then(res => res.json())
             .then(res => {
                 this.setState({

@@ -1,5 +1,6 @@
 import react from "react";
 import HomeLayout from "../layouts/HomeLayout";
+import { get, del } from "../utils/formProvider";
 
 class UserList extends react.Component{
     constructor (props) {
@@ -9,7 +10,7 @@ class UserList extends react.Component{
         }
     }
     componentWillMount () {
-        fetch('http://localhost:3000/user')
+        get('http://localhost:3000/user')
             .then(res => res.json())
             .then(res => {
                 console.log(res)
@@ -29,8 +30,8 @@ class UserList extends react.Component{
         console.log(confirmed)
 
         if (confirmed) {
-            fetch('http://localhost:3000/user/' + user.id, {
-                method: 'delete'
+            del('http://localhost:3000/user', {
+                id: user.id
             })
                 .then(res => res.json())
                 .then(res => {

@@ -1,5 +1,6 @@
 import react from "react";
 import HomeLayout from "../layouts/HomeLayout";
+import { get, del } from "../utils/request";
 
 class BookList extends react.Component {
     constructor(props) {
@@ -9,7 +10,7 @@ class BookList extends react.Component {
         }
     }
     componentWillMount() {
-        fetch('http://localhost:3000/book')
+        get('http://localhost:3000/book')
             .then(res => res.json())
             .then(res => {
                 console.log(res)
@@ -29,8 +30,8 @@ class BookList extends react.Component {
         console.log(confirmed)
 
         if (confirmed) {
-            fetch('http://localhost:3000/book/' + book.id, {
-                method: 'delete'
+            del('http://localhost:3000/book', {
+                id: book.id
             })
                 .then(res => res.json())
                 .then(res => {

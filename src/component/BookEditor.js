@@ -2,6 +2,7 @@ import react from "react";
 import formProvider from "../utils/formProvider";
 import FormItem from "./FormItem";
 import AutoComplete from "./AutoComplete";
+import { get, post } from "../utils/formProvider";
 
 class BookEditor extends react.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class BookEditor extends react.Component {
     }
 
     getRecommendUsers(partialUserId) {
-        fetch('http://localhost:3000/user?id_like=' + partialUserId)
+        get('http://localhost:3000/user?id_like=' + partialUserId)
             .then(res => res.json())
             .then(res => {
                 if (res.length == 1 && res.value == partialUserId) {
@@ -69,16 +70,10 @@ class BookEditor extends react.Component {
         }
 
 
-        fetch(apiUrl, {
-            method: method,
-            body: JSON.stringify({
-                name: name.value,
-                price: price.value,
-                owner_id: owner_id.value
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+        post(apiUrl, {
+            name: name.value,
+            price: price.value,
+            owner_id: owner_id.value
         })
             .then(res => res.json())
             .then(res => {
