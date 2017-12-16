@@ -16,9 +16,11 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "cd server && json-server db.json -w -p 3000",
-    "dev": "roadhog server"
+    "dev": "roadhog server",
+    "server": "node server/index.js"
   },
   "devDependencies": {
-    "babel-plugin-import": "^1.6.2"
+    "babel-plugin-import": "^1.6.2",
+    "json-server": "^0.12.1"
   }
 }
