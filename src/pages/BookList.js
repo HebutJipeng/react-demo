@@ -11,13 +11,13 @@ class BookList extends react.Component {
     }
     componentWillMount() {
         get('http://localhost:3000/book')
-            .then(res => res.json())
             .then(res => {
-                console.log(res)
+                console.log('-->', res)
                 this.setState({
                     bookList: res
                 });
-            });
+            })
+            .catch(err => console.error(err))
     }
 
     handleEdit(book) {

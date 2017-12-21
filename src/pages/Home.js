@@ -11,9 +11,9 @@ class Home extends Component {
                 <br/>
                 <Link to="/user/list">用户列表</Link>
                 <br/>
-                <Link to="/book/add" >添加用户</Link>
+                <Link to="/book/add" >添加书籍</Link>
                 <br />
-                <Link to="/book/list">用户列表</Link>
+                <Link to="/book/list">书籍列表</Link>
             </HomeLayout>
         )
     };

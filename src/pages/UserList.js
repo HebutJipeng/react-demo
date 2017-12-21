@@ -1,6 +1,6 @@
 import react from "react";
 import HomeLayout from "../layouts/HomeLayout";
-import { get, del } from "../utils/formProvider";
+import { get, del } from "../utils/request";
 
 class UserList extends react.Component{
     constructor (props) {
@@ -11,7 +11,6 @@ class UserList extends react.Component{
     }
     componentWillMount () {
         get('http://localhost:3000/user')
-            .then(res => res.json())
             .then(res => {
                 console.log(res)
                 this.setState({
@@ -33,7 +32,6 @@ class UserList extends react.Component{
             del('http://localhost:3000/user', {
                 id: user.id
             })
-                .then(res => res.json())
                 .then(res => {
                     this.setState({
                         userList: this.state.userList.filter(item => item.id !== user.id)

@@ -19,7 +19,9 @@ export default function request (method, url, body) {
         body
     })
     .then(res => {
+        console.log(res)
         if (res.status == 401) {
+            console.log(res, history)
             history.push('/login')
             return Promise.reject('Unauthorized.')
         } else {
