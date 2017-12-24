@@ -27,13 +27,7 @@ class UserEdit extends react.Component {
 
     render() {
         const { user } = this.state
-        return(
-            <HomeLayout title="编辑用户">
-                {
-                    user ? <UserEditor editTarget={ user }/> : '加载中...'
-                }
-            </HomeLayout>
-        )
+        return user ? <UserEditor editTarget={ user }/> : '加载中...'
     }
 }
 

@@ -34,7 +34,7 @@ class Login extends React.Component{
     render() {
         const { form: {account, password}, onFormChange} = this.props
         return (
-            <HomeLayout title="登录页面">
+            <div>
                 <form onSubmit={this.handleSubmit}>
                     <FormItem
                         label="账号"
@@ -53,7 +53,7 @@ class Login extends React.Component{
                 </form>
                 <br />
                 <input type="submit" value="登录" onClick={this.handleSubmit} />
-            </HomeLayout>
+            </div>
         )
     }
 }

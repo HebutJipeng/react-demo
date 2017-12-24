@@ -27,13 +27,7 @@ class BookEdit extends react.Component {
 
     render() {
         const { book } = this.state
-        return (
-            <HomeLayout title="编辑书籍信息">
-                {
-                    book ? <BookEditor editTarget={book} /> : '加载中...'
-                }
-            </HomeLayout>
-        )
+        return book ?  <BookEditor editTarget={book} /> : '加载中...'
     }
 }
 

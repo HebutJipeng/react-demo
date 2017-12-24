@@ -7,9 +7,7 @@ import UserEditor from "../component/BookEditor";
 class Add extends react.Component {
     render() {
         return (
-            <HomeLayout title="添加书籍">
-                <UserEditor />
-            </HomeLayout>
+            <UserEditor />
         )
     }
 }

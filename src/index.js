@@ -6,20 +6,21 @@ import UserAddPage from "./pages/UserAdd";
 import Book from "./pages/Book";
 import Login from "./pages/Login";
 import { createBrowserHistory } from 'history';
+import HomeLayout from "./layouts/HomeLayout";
 const history = createBrowserHistory()
 
 const supportsHistory = 'pushState' in window.history;
 
 ReactDOM.render((
     <BrowserRouter forceRefresh={ true }>
-        <div>
-            <Switch>
-                {/* todo */}
+        <Switch>
+            {/* todo */}
+            <HomeLayout>
                 <Route exact path="/" component={HomePage } />
                 <Route path="/user" component={UserAddPage } />
                 <Route path="/book" component={ Book} />
-                <Route path="/login" component = {Login} />
-            </Switch>
-        </div>
+            </HomeLayout>
+            <Route path="/login" component = {Login} />
+        </Switch>
     </BrowserRouter>
 ), document.getElementById('root'));

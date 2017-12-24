@@ -7,9 +7,7 @@ import UserEditor from "../component/UserEditor";
 class Add extends react.Component {
     render() {
         return(
-            <HomeLayout title="添加用户">
-                <UserEditor />
-            </HomeLayout>
+            <UserEditor />
         )
     }
 }

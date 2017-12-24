@@ -49,38 +49,36 @@ class UserList extends react.Component{
     render() {
         const { userList } = this.state
         return(
-            <HomeLayout title="用户列表">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>id</td>
-                            <td>name</td>
-                            <td>sex</td>
-                            <td>age</td>
-                            <td>method</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            userList.map((user) => {
-                                return (
-                                    <tr key={ user.id }>
-                                        <td>{ user.id }</td>
-                                        <td>{ user.name }</td>
-                                        <td>{ user.sex }</td>
-                                        <td>{ user.age }</td>
-                                        <td>
-                                            <a href="javascript:;" onClick={() => {this.handleEdit(user)}}>编辑</a>
-                                            <br/>
-                                            <a href="javascript:;" onClick={() => {this.handleDel(user)}}>删除</a>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
-            </HomeLayout>
+            <table>
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>name</td>
+                        <td>sex</td>
+                        <td>age</td>
+                        <td>method</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        userList.map((user) => {
+                            return (
+                                <tr key={ user.id }>
+                                    <td>{ user.id }</td>
+                                    <td>{ user.name }</td>
+                                    <td>{ user.sex }</td>
+                                    <td>{ user.age }</td>
+                                    <td>
+                                        <a href="javascript:;" onClick={() => {this.handleEdit(user)}}>编辑</a>
+                                        <br/>
+                                        <a href="javascript:;" onClick={() => {this.handleDel(user)}}>删除</a>
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    }
+                </tbody>
+            </table>
         )
     }
 }

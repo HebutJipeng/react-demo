@@ -2,19 +2,14 @@ import React from "react";
 import { BrowserRouter, Link } from "react-router-dom";
 import HomeLayout from "../layouts/HomeLayout";
 const Component = React.Component;
+import style from "../styles/home-page.less";
 
 class Home extends Component {
     render() {
         return (
-            <HomeLayout title="Welcome">
-                <Link to="/user/add" >添加用户</Link>
-                <br/>
-                <Link to="/user/list">用户列表</Link>
-                <br/>
-                <Link to="/book/add" >添加书籍</Link>
-                <br />
-                <Link to="/book/list">书籍列表</Link>
-            </HomeLayout>
+            <div className={style.welcome}>
+                Welcome
+            </div>
         )
     };
 }

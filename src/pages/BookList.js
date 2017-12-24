@@ -51,38 +51,36 @@ class BookList extends react.Component {
     render() {
         const { bookList } = this.state
         return (
-            <HomeLayout title="书籍列表">
-                <table>
-                    <thead>
-                        <tr>
-                            <td>id</td>
-                            <td>name</td>
-                            <td>price</td>
-                            <td>owner_id</td>
-                            <td>method</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            bookList.map((book) => {
-                                return (
-                                    <tr key={book.id}>
-                                        <td>{book.id}</td>
-                                        <td>{book.name}</td>
-                                        <td>{book.price}</td>
-                                        <td>{book.owner_id}</td>
-                                        <td>
-                                            <a href="javascript:;" onClick={() => { this.handleEdit(book) }}>编辑</a>
-                                            <br />
-                                            <a href="javascript:;" onClick={() => { this.handleDel(book) }}>删除</a>
-                                        </td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
-            </HomeLayout>
+            <table>
+                <thead>
+                    <tr>
+                        <td>id</td>
+                        <td>name</td>
+                        <td>price</td>
+                        <td>owner_id</td>
+                        <td>method</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        bookList.map((book) => {
+                            return (
+                                <tr key={book.id}>
+                                    <td>{book.id}</td>
+                                    <td>{book.name}</td>
+                                    <td>{book.price}</td>
+                                    <td>{book.owner_id}</td>
+                                    <td>
+                                        <a href="javascript:;" onClick={() => { this.handleEdit(book) }}>编辑</a>
+                                        <br />
+                                        <a href="javascript:;" onClick={() => { this.handleDel(book) }}>删除</a>
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    }
+                </tbody>
+            </table>
         )
     }
 }
