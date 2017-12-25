@@ -1,7 +1,7 @@
 import react from "react";
 import HomeLayout from "../layouts/HomeLayout";
 import UserEditor from "../component/UserEditor";
-import { get } from "../utils/formProvider";
+import { get } from "../utils/request";
 
 class UserEdit extends react.Component {
     constructor(props) {

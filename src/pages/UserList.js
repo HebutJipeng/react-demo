@@ -1,5 +1,5 @@
 import react from "react";
-import HomeLayout from "../layouts/HomeLayout";
+import { message, Table, Button, Popconfirm } from 'antd';
 import { get, del } from "../utils/request";
 
 class UserList extends react.Component{
@@ -26,60 +26,57 @@ class UserList extends react.Component{
 
     handleDel (user) {
         const confirmed = confirm(`确定要删除用户 ${user.name}`);
-        console.log(confirmed)
-
-        if (confirmed) {
-            del('http://localhost:3000/user', {
-                id: user.id
+        del('http://localhost:3000/user/' + user.id)
+            .then(res => {
+                this.setState({
+                    userList: this.state.bookList.filter(item => item.id !== user.id)
+                });
+                message.success('删除用户成功');
             })
-                .then(res => {
-                    this.setState({
-                        userList: this.state.userList.filter(item => item.id !== user.id)
-                    })
-                    alert('删除用户成功')
-                })
-                .catch(err => {
-                    console.log(err);
-                    alert('删除用户失败')
-                })
-            
-        }
+            .catch(err => {
+                console.error(err);
+                message.error('删除用户失败');
+            });
     }
 
     render() {
-        const { userList } = this.state
-        return(
-            <table>
-                <thead>
-                    <tr>
-                        <td>id</td>
-                        <td>name</td>
-                        <td>sex</td>
-                        <td>age</td>
-                        <td>method</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        userList.map((user) => {
-                            return (
-                                <tr key={ user.id }>
-                                    <td>{ user.id }</td>
-                                    <td>{ user.name }</td>
-                                    <td>{ user.sex }</td>
-                                    <td>{ user.age }</td>
-                                    <td>
-                                        <a href="javascript:;" onClick={() => {this.handleEdit(user)}}>编辑</a>
-                                        <br/>
-                                        <a href="javascript:;" onClick={() => {this.handleDel(user)}}>删除</a>
-                                    </td>
-                                </tr>
-                            );
-                        })
-                    }
-                </tbody>
-            </table>
-        )
+        const { userList } = this.state;
+
+        const columns = [
+            {
+                title: '用户ID',
+                dataIndex: 'id'
+            },
+            {
+                title: '用户名',
+                dataIndex: 'name'
+            },
+            {
+                title: '性别',
+                dataIndex: 'gender'
+            },
+            {
+                title: '年龄',
+                dataIndex: 'age'
+            },
+            {
+                title: '操作',
+                render: (text, record) => {
+                    return (
+                        <Button.Group type="ghost">
+                            <Button size="small" onClick={() => this.handleEdit(record)}>编辑</Button>
+                            <Popconfirm title="确定要删除吗？" onConfirm={() => this.handleDel(record)}>
+                                <Button size="small">编辑</Button>
+                            </Popconfirm>
+                        </Button.Group>
+                    );
+                }
+            }
+        ];
+
+        return (
+            <Table columns={columns} dataSource={userList} rowKey={row => row.id} />
+        );
     }
 }
 

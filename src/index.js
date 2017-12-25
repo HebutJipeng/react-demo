@@ -15,12 +15,12 @@ ReactDOM.render((
     <BrowserRouter forceRefresh={ true }>
         <Switch>
             {/* todo */}
+            <Route path="/login" component = {Login} />
             <HomeLayout>
                 <Route exact path="/" component={HomePage } />
                 <Route path="/user" component={UserAddPage } />
                 <Route path="/book" component={ Book} />
             </HomeLayout>
-            <Route path="/login" component = {Login} />
         </Switch>
     </BrowserRouter>
 ), document.getElementById('root'));

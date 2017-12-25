@@ -1,4 +1,5 @@
-import React from "react";
+import React,{ PropTypes } from "react";
+import { Input } from 'antd';
 import style from "../styles/auto-complete.less";
 
 function getItemValue(item) {
@@ -9,6 +10,7 @@ class AutoComplete extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            show: false,
             displayValue: '',
             activeItemIndex: -1
         };
@@ -21,7 +23,7 @@ class AutoComplete extends React.Component {
             activeItemIndex: -1,
             displayValue: ''
         })
-        this.props.onValueChange(value)
+        this.props.onChange(value)
     }
 
     handleKeyDown (e) {
@@ -89,7 +91,6 @@ class AutoComplete extends React.Component {
     } 
 
     handleLeave () {
-        console.log(1)
         this.setState({
             activeItemIndex: -1,
             displayValue: ''
@@ -97,29 +98,31 @@ class AutoComplete extends React.Component {
     }
 
     render() {
-        const { displayValue, activeItemIndex } = this.state
+        const { show, displayValue, activeItemIndex } = this.state
         const { value, options } = this.props
         return (
             <div className={style.wrapper}>
-                <input 
-                    value= {displayValue || value}
-                    onChange ={ e => this.handleChange(e.target.value)}     
-                    onKeyDown = {this.handleKeyDown}
+                <Input
+                    value={displayValue || value}
+                    onChange={e => this.handleChange(e.target.value)}
+                    onKeyDown={this.handleKeyDown}
+                    onFocus={() => this.setState({ show: true })}
+                    onBlur={() => this.setState({ show: false })}
                 />
-                { options.length > 0 && (
+                {show && options.length > 0 && (
                     <ul className={style.options} onMouseLeave={this.handleLeave}>
                         {
                             options.map((item, index) => {
                                 return (
-                                    <li 
-                                        key={ index } 
-                                        className={activeItemIndex == index ? style.active : ''}
-                                        onMouseEnter={() => {this.handleEnter(index)}}
-                                        onClick={() => {this.handleChange(getItemValue(item))}}
+                                    <li
+                                        key={index}
+                                        className={index === activeItemIndex ? style.active : ''}
+                                        onMouseEnter={() => this.handleEnter(index)}
+                                        onClick={() => this.handleChange(getItemValue(item))}
                                     >
-                                        { item.text || item }
+                                        {item.text || item}
                                     </li>
-                                )
+                                );
                             })
                         }
                     </ul>
@@ -130,9 +133,9 @@ class AutoComplete extends React.Component {
 }
 
 AutoComplete.propTypes = {
-    value: React.PropTypes.string.isRequired,
-    options: React.PropTypes.array.isRequired,
-    onValueChange: React.PropTypes.func.isRequired 
+    value: PropTypes.any,
+    options: PropTypes.array,
+    onChange: PropTypes.func
 };
 
 export default AutoComplete;

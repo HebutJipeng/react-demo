@@ -1,6 +1,7 @@
 import react from "react";
 import HomeLayout from "../layouts/HomeLayout";
 import { get, del } from "../utils/request";
+import { message, Table, Button, Popconfirm } from 'antd';
 
 class BookList extends react.Component {
     constructor(props) {
@@ -27,61 +28,56 @@ class BookList extends react.Component {
 
     handleDel(book) {
         const confirmed = confirm(`确定要删除 ${book.name}`);
-        console.log(confirmed)
-
-        if (confirmed) {
-            del('http://localhost:3000/book', {
-                id: book.id
+        del('http://localhost:3000/book/' + book.id)
+            .then(res => {
+                this.setState({
+                    bookList: this.state.bookList.filter(item => item.id !== book.id)
+                });
+                message.success('删除图书成功');
             })
-                .then(res => res.json())
-                .then(res => {
-                    this.setState({
-                        booList: this.state.bookList.filter(item => item.id !== book.id)
-                    })
-                    alert('删除书籍成功')
-                })
-                .catch(err => {
-                    console.log(err);
-                    alert('删除书籍失败')
-                })
-
-        }
+            .catch(err => {
+                console.error(err);
+                message.error('删除图书失败');
+            });
     }
 
     render() {
-        const { bookList } = this.state
+        const { bookList } = this.state;
+
+        const columns = [
+            {
+                title: '图书ID',
+                dataIndex: 'id'
+            },
+            {
+                title: '书名',
+                dataIndex: 'name'
+            },
+            {
+                title: '价格',
+                dataIndex: 'price',
+                render: (text, record) => <span>&yen;{record.price / 100}</span>
+            },
+            {
+                title: '所有者ID',
+                dataIndex: 'owner_id'
+            },
+            {
+                title: '操作',
+                render: (text, record) => (
+                    <Button.Group type="ghost">
+                        <Button size="small" onClick={() => this.handleEdit(record)}>编辑</Button>
+                        <Popconfirm title="确定要删除吗？" onConfirm={() => this.handleDel(record)}>
+                            <Button size="small">删除</Button>
+                        </Popconfirm>
+                    </Button.Group>
+                )
+            }
+        ];
+
         return (
-            <table>
-                <thead>
-                    <tr>
-                        <td>id</td>
-                        <td>name</td>
-                        <td>price</td>
-                        <td>owner_id</td>
-                        <td>method</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        bookList.map((book) => {
-                            return (
-                                <tr key={book.id}>
-                                    <td>{book.id}</td>
-                                    <td>{book.name}</td>
-                                    <td>{book.price}</td>
-                                    <td>{book.owner_id}</td>
-                                    <td>
-                                        <a href="javascript:;" onClick={() => { this.handleEdit(book) }}>编辑</a>
-                                        <br />
-                                        <a href="javascript:;" onClick={() => { this.handleDel(book) }}>删除</a>
-                                    </td>
-                                </tr>
-                            );
-                        })
-                    }
-                </tbody>
-            </table>
-        )
+            <Table columns={columns} dataSource={bookList} rowKey={row => row.id} />
+        );
     }
 }
 
